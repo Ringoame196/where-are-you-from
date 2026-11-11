@@ -109,6 +109,7 @@ function viewAnser() {
   viewDivision.append(titleElement);
 
   const anserBtn = document.createElement('button');
+  anserBtn.setAttribute('class','btn btn-outline-success');
   anserBtn.textContent = '見る';
   anserBtn.addEventListener('click',() => {
     viewDivision.innerText = "";
