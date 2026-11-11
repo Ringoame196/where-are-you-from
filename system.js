@@ -50,16 +50,19 @@ function view() {
   titleElement.textContent = '調査中...';
   viewDivision.append(titleElement);
 
-  const indexSize = accessIndexs.length - 1;
-  h = Math.floor(indexSize / 2);
+  const rowElement = document.createElement('div');
+  rowElement.setAttribute('class','row');
 
   for(let i = 0; i < actives.length; i++) {
     const index = actives[i];
     const prefecture = prefectures[index];
     const gourmet = gourmets[index];
 
+    const colElement = document.createElement('div');
+    colElement.setAttribute('class','col-sm-2');
+
     const cardElement = document.createElement('div');
-    cardElement.setAttribute('class','card mb-3 shadow-sm');
+    cardElement.setAttribute('class','card');
 
     const headerElement = document.createElement('div');
     headerElement.setAttribute('class','card-header text-bg-primary');
@@ -75,7 +78,9 @@ function view() {
     cardBodyElement.append(prefectureElement);
 
     cardElement.append(cardBodyElement)
-    viewDivision.append(cardElement);
+    colElement.append(cardElement);
+    rowElement.append(colElement);
+    viewDivision.append(rowElement);
   }
   
   const trueBtnElement = document.createElement('button');
