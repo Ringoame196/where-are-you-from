@@ -28,9 +28,20 @@ function reset() {
 }
 
 function view() {
-  if (h === 1) {
+  if (accessIndexs.length === 1) {
     viewAnser();
     return;
+  }
+
+  let actives = [];
+  let inactives = [];
+
+  for(let i = 0; i < accessIndexs.length; i ++) {
+    if(i % 2 == 0) {
+      actives.push(accessIndexs[i]);
+    } else {
+      inactives.push(accessIndexs[i]);
+    }
   }
 
   viewDivision.innerText = "";
@@ -42,8 +53,8 @@ function view() {
   const indexSize = accessIndexs.length - 1;
   h = Math.floor(indexSize / 2);
 
-  for(let i = 0; i < h; i++) {
-    const index = accessIndexs[i];
+  for(let i = 0; i < actives.length; i++) {
+    const index = actives[i];
     const prefecture = prefectures[index];
     const gourmet = gourmets[index];
 
@@ -55,7 +66,7 @@ function view() {
   const trueBtnElement = document.createElement('button');
   trueBtnElement.textContent = 'この中にある！';
   trueBtnElement.addEventListener('click',() => {
-    accessIndexs.splice(h + 1);
+    accessIndexs = actives;
     view();
 })
   viewDivision.appendChild(trueBtnElement);
@@ -63,7 +74,7 @@ function view() {
   const falseButElement = document.createElement('button');
   falseButElement.textContent = 'この中にない！';
   falseButElement.addEventListener('click',() => {
-    accessIndexs.splice(0,h);
+    accessIndexs = inactives;
   view();
 })
   viewDivision.appendChild(falseButElement);
@@ -87,6 +98,14 @@ function viewAnser() {
     const subTitleElement = document.createElement('h2');
     subTitleElement.textContent = gourmets[index] + ' 美味しいですよね！'
     viewDivision.append(subTitleElement);
+
+    const moreBtnElement = document.createElement('button');
+    moreBtnElement.textContent = 'もう一度';
+    moreBtnElement.addEventListener('click',() => {
+      reset();
+      view();
+    })
+    viewDivision.append(moreBtnElement);
   })
   viewDivision.append(anserBtn);
 }
