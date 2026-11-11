@@ -71,14 +71,8 @@ function view() {
 
     const prefectureElement = document.createElement('p');
     prefectureElement.setAttribute('class','card-text');
-    prefectureElement.textContent = '都道府県：' + prefecture;
-
-    const gourmetElement = document.createElement('p');
-    gourmetElement.setAttribute('class','card-text');
-    gourmetElement.textContent = 'グルメ：' + gourmet;
-
+    prefectureElement.textContent = prefecture;
     cardBodyElement.append(prefectureElement);
-    cardBodyElement.append(gourmetElement);
 
     cardElement.append(cardBodyElement)
     viewDivision.append(cardElement);
