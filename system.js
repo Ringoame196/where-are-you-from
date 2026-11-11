@@ -47,7 +47,7 @@ function view() {
   viewDivision.innerText = "";
 
   const titleElement = document.createElement('h1');
-  titleElement.textContent = '候補';
+  titleElement.textContent = '調査中...';
   viewDivision.append(titleElement);
 
   const indexSize = accessIndexs.length - 1;
@@ -58,12 +58,34 @@ function view() {
     const prefecture = prefectures[index];
     const gourmet = gourmets[index];
 
-    const pElement = document.createElement('p');
-    pElement.textContent = '候補' + (i + 1) + '：' + '都道府県：' + prefecture + ' 特産品：' + gourmet;
-    viewDivision.append(pElement);
+    const cardElement = document.createElement('div');
+    cardElement.setAttribute('class','card mb-3 shadow-sm');
+
+    const headerElement = document.createElement('div');
+    headerElement.setAttribute('class','card-header text-bg-primary');
+    headerElement.textContent = '候補' + (i + 1);
+    cardElement.append(headerElement);
+
+    const cardBodyElement = document.createElement('div');
+    cardBodyElement.setAttribute('class','card-doby');
+
+    const prefectureElement = document.createElement('p');
+    prefectureElement.setAttribute('class','card-text');
+    prefectureElement.textContent = '都道府県：' + prefecture;
+
+    const gourmetElement = document.createElement('p');
+    gourmetElement.setAttribute('class','card-text');
+    gourmetElement.textContent = 'グルメ：' + gourmet;
+
+    cardBodyElement.append(prefectureElement);
+    cardBodyElement.append(gourmetElement);
+
+    cardElement.append(cardBodyElement)
+    viewDivision.append(cardElement);
   }
   
   const trueBtnElement = document.createElement('button');
+  trueBtnElement.setAttribute('class','btn btn-outline-success');
   trueBtnElement.textContent = 'この中にある！';
   trueBtnElement.addEventListener('click',() => {
     accessIndexs = actives;
@@ -72,6 +94,7 @@ function view() {
   viewDivision.appendChild(trueBtnElement);
 
   const falseButElement = document.createElement('button');
+  falseButElement.setAttribute('class','btn btn-outline-danger');
   falseButElement.textContent = 'この中にない！';
   falseButElement.addEventListener('click',() => {
     accessIndexs = inactives;
@@ -100,6 +123,7 @@ function viewAnser() {
     viewDivision.append(subTitleElement);
 
     const moreBtnElement = document.createElement('button');
+    moreBtnElement.setAttribute('class','btn btn-outline-secondary');
     moreBtnElement.textContent = 'もう一度';
     moreBtnElement.addEventListener('click',() => {
       reset();

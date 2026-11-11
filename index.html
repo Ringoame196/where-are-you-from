@@ -3,17 +3,35 @@
 <head>
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-fx038NkLY4U1TCrBDiu5FWPEa9eiZu01EiLryshJbCo=" crossorigin="anonymous">
   <title>Where are you from</title>
 </head>
-<body>
-  <div id="first-area">
+<body class="bg-primary-subtle">
+  <header>
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand">Where are you from</a>
+      </div>
+    </nav>
+  </header>
+  <div id="first-area" class="container pt-5">
     <h1>あなたの都道府県を当てます！</h1>
     <p>名前を入れてね</p>
-    <input type="text" id="user-name">
-  <button id="assessment">開始</button>
+    <div class="row">
+      <div class="col-sm9 col-lg-6">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="user-name" size="40" maxlength="20">
+          <button class="btn btn-outline-success" id="assessment">開始</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id='view-area'></div>
+  <div class="row">
+      <div class="col-lg-9">
+          <div id='view-area'></div>
+      </div>
+  </div>
   <script src='system.js'></script>
 </body>
 </html>
