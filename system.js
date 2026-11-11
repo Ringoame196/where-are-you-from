@@ -70,7 +70,7 @@ function view() {
     cardElement.append(headerElement);
 
     const cardBodyElement = document.createElement('div');
-    cardBodyElement.setAttribute('class','card-doby');
+    cardBodyElement.setAttribute('class','card-body');
 
     const prefectureElement = document.createElement('p');
     prefectureElement.setAttribute('class','card-text');
