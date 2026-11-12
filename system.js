@@ -7,6 +7,7 @@ const size = prefectures.length;
 const viewDivision = document.getElementById('view-area');
 const userNameInput = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
+const answerDivision = document.getElementById('answer-area');
 
 let accessIndexs = [];
 let userName;
@@ -14,6 +15,8 @@ let h;
 
 function reset() {
   document.getElementById('first-area').innerText = '';
+  viewDivision.innerText = '';
+  answerDivision.innerText = '';
   for(let i = 0; i < size; i++) {
     accessIndexs.push(i);
   }
@@ -47,6 +50,7 @@ function view() {
   viewDivision.innerText = "";
 
   const titleElement = document.createElement('h1');
+  titleElement.setAttribute('class','text-center');
   titleElement.textContent = '調査中...';
   viewDivision.append(titleElement);
 
@@ -65,7 +69,7 @@ function view() {
     cardElement.setAttribute('class','card');
 
     const headerElement = document.createElement('div');
-    headerElement.setAttribute('class','card-header text-bg-primary');
+    headerElement.setAttribute('class','card-header text-bg-primary text-center');
     headerElement.textContent = '候補' + (i + 1);
     cardElement.append(headerElement);
 
@@ -73,7 +77,7 @@ function view() {
     cardBodyElement.setAttribute('class','card-body');
 
     const prefectureElement = document.createElement('p');
-    prefectureElement.setAttribute('class','card-text');
+    prefectureElement.setAttribute('class','card-text text-center');
     prefectureElement.textContent = prefecture;
     cardBodyElement.append(prefectureElement);
 
@@ -83,6 +87,9 @@ function view() {
     viewDivision.append(rowElement);
   }
   
+  const dFlexElement = document.createElement('div');
+  dFlexElement.setAttribute('class','d-flex justify-content-center');
+
   const trueBtnElement = document.createElement('button');
   trueBtnElement.setAttribute('class','btn btn-outline-success');
   trueBtnElement.textContent = 'この中にある！';
@@ -90,7 +97,7 @@ function view() {
     accessIndexs = actives;
     view();
 })
-  viewDivision.appendChild(trueBtnElement);
+  dFlexElement.append(trueBtnElement);
 
   const falseButElement = document.createElement('button');
   falseButElement.setAttribute('class','btn btn-outline-danger');
@@ -99,28 +106,42 @@ function view() {
     accessIndexs = inactives;
   view();
 })
-  viewDivision.appendChild(falseButElement);
+  dFlexElement.append(falseButElement);
+  
+  viewDivision.appendChild(dFlexElement);
 }
 
 function viewAnser() {
   viewDivision.innerText = "";
   const titleElement = document.createElement('h1');
+  titleElement.setAttribute('class','text-center');
   titleElement.textContent = userName + 'の出身地は...';
-  viewDivision.append(titleElement);
+  answerDivision.append(titleElement);
+
+  const dFlexElement = document.createElement('div');
+  dFlexElement.setAttribute('class','d-flex justify-content-center');
 
   const anserBtn = document.createElement('button');
   anserBtn.setAttribute('class','btn btn-outline-success');
   anserBtn.textContent = '見る';
   anserBtn.addEventListener('click',() => {
-    viewDivision.innerText = "";
+    answerDivision.innerText = '';
+    dFlexElement.innerText = '';
     const titleElement = document.createElement('h1');
-    const index = accessIndexs[0];
-    titleElement.textContent = userName + 'の出身地は、' + prefectures[index] + 'だ！';
-    viewDivision.append(titleElement);
+    titleElement.setAttribute('class','text-center');
+    titleElement.textContent = userName + 'の出身地は...';
+    answerDivision.append(titleElement);
 
-    const subTitleElement = document.createElement('h2');
-    subTitleElement.textContent = gourmets[index] + ' 美味しいですよね！'
-    viewDivision.append(subTitleElement);
+    const prefectureElement = document.createElement('h2');
+    const index = accessIndexs[0];
+    prefectureElement.textContent = prefectures[index] + 'だ！';
+    prefectureElement.setAttribute('class','text-center');
+    answerDivision.append(prefectureElement);
+
+    const gourmentElement = document.createElement('h2');
+    gourmentElement.textContent = gourmets[index] + ' 美味しいですよね！'
+    gourmentElement.setAttribute('class','text-center');
+    answerDivision.append(gourmentElement);
 
     const moreBtnElement = document.createElement('button');
     moreBtnElement.setAttribute('class','btn btn-outline-secondary');
@@ -129,9 +150,11 @@ function viewAnser() {
       reset();
       view();
     })
-    viewDivision.append(moreBtnElement);
+    dFlexElement.append(moreBtnElement);
+    answerDivision.append(dFlexElement);
   })
-  viewDivision.append(anserBtn);
+  dFlexElement.append(anserBtn);
+  answerDivision.append(dFlexElement);
 }
 
 assessmentButton.addEventListener('click',() => {
